@@ -1,0 +1,16 @@
+image: Visual Studio 2019
+
+init:
+  - git config --global core.autocrlf true
+
+environment:
+  matrix:
+  - solution: InverseIndex/InverseIndex.sln
+
+before_build:
+  - nuget restore %solution%
+
+build_script:
+  project: $(solution)
+
+test: off

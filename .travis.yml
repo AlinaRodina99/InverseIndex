@@ -1,0 +1,13 @@
+language: csharp
+sudo: required
+dist: xenial
+dotnet: 3.1
+
+env:
+  - solution: InverseIndex/InverseIndex.sln
+
+before_build:
+  - nuget restore $solution
+
+build:
+  - dotnet build $solution
