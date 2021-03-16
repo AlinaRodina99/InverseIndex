@@ -10,5 +10,7 @@ environment:
 before_build:
   - nuget restore %solution%
 
-build:
+build_script:
   project: $(solution)
+
+test: off
