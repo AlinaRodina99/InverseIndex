@@ -6,8 +6,6 @@ dotnet: 3.1
 env:
   - solution: InverseIndex/InverseIndex.sln
 
-before_build:
-  - nuget restore $solution
-
-build:
+script:
+  - dotnet restore $solution
   - dotnet build $solution
