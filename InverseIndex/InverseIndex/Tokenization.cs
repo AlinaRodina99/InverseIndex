@@ -39,7 +39,7 @@ namespace InverseIndex
             string[] corpusFiles = Directory.GetFiles(pathToCorpus);
             Parallel.ForEach(corpusFiles, corpusFile =>
             {
-                var tokenizer = new TextTokenizer(corpusFile);
+                var tokenizer = new TextTokenizer(File.ReadAllText(corpusFile));
                 try
                 {
                     using (StreamWriter streamWriter = File.CreateText(pathToTokenizedCorpus + @"\tokenized_" + Path.GetFileName(corpusFile)))

@@ -6,7 +6,8 @@ namespace InverseIndex
     {
         public static void Main()
         {
-            Console.WriteLine("Hello World!");
+            var indexer = new Indexer();
+            indexer.Start();
         }
     }
 }
