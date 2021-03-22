@@ -16,35 +16,45 @@ namespace InverseIndex
             Console.WriteLine("Hello!");
             Console.WriteLine("This program processes given corpus and provides boolean search within it using created inverse index.");
 
-            Console.WriteLine("Would you like to specify the path to corpus? Y/N");
-            var corpusInput = Console.ReadLine();
-            while (corpusInput != "Y" && corpusInput != "y" && corpusInput != "N" && corpusInput != "n")
+            var pathToCorpus = SpecifyValue("path to corpus");
+            if (pathToCorpus == "")
             {
-                Console.WriteLine("Please, enter Y or N.");
-                corpusInput = Console.ReadLine();
-            }
-            var pathToCorpus = Directory.GetCurrentDirectory() + "/../../../../Corpus";
-            if (corpusInput == "Y" || corpusInput == "y")
-            {
-                pathToCorpus = Console.ReadLine();
+                pathToCorpus = Directory.GetCurrentDirectory() + "/../../../../Corpus";
             }
 
-            Console.WriteLine("Would you like to specify the path to tokenized corpus? Y/N");
-            var tokenizedCorpusInput = Console.ReadLine();
-            while (tokenizedCorpusInput != "Y" && tokenizedCorpusInput != "y" && tokenizedCorpusInput != "N" && tokenizedCorpusInput != "n")
+            var pathToTokenizedCorpus = SpecifyValue("path to tokenized corpus");
+            if (pathToTokenizedCorpus == "")
             {
-                Console.WriteLine("Please, enter Y or N.");
-                tokenizedCorpusInput = Console.ReadLine();
-            }
-            var pathToTokenizedCorpus = Directory.GetCurrentDirectory() + "/../../../../TokenizedCorpus";
-            if (tokenizedCorpusInput == "Y" || tokenizedCorpusInput == "y")
-            {
-                pathToTokenizedCorpus = Console.ReadLine();
+                pathToTokenizedCorpus = Directory.GetCurrentDirectory() + "/../../../../TokenizedCorpus";
             }
             Directory.CreateDirectory(pathToTokenizedCorpus);
 
             var tokenization = new Tokenization(pathToCorpus, pathToTokenizedCorpus);
             tokenization.Tokenize();
+        }
+
+        /// <summary>
+        /// Specifies given value from user if desired
+        /// </summary>
+        /// <param name="specifyingValue">Value to specify</param>
+        /// <returns>Specified value if desired, empty string otherwise</returns>
+        private string SpecifyValue(string specifyingValue)
+        {
+            Console.WriteLine($"Would you like to specify the {specifyingValue}? Y/N");
+            var input = Console.ReadLine();
+            while (input != "Y" && input != "y" && input != "N" && input != "n")
+            {
+                Console.WriteLine("Please, enter Y or N.");
+                input = Console.ReadLine();
+            }
+
+            if (input == "Y" || input == "y")
+            {
+                Console.WriteLine($"Enter the {specifyingValue}");
+                return Console.ReadLine();
+            }
+
+            return "";
         }
     }
 }
