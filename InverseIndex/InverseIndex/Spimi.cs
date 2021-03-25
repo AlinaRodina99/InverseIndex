@@ -10,6 +10,10 @@ namespace InverseIndex
     {
         private readonly string pathToTermsAndDocIds;
 
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="pathToTermsAndDocIds">Path to files with terms and document ids.</param>
         public Spimi(string pathToTermsAndDocIds)
         {
             this.pathToTermsAndDocIds = pathToTermsAndDocIds;
@@ -21,6 +25,9 @@ namespace InverseIndex
             MergeBlocks();
         }
 
+        /// <summary>
+        /// First part of Spimi algorithm: splitting into blocks and sorting and aggregating them.
+        /// </summary>
         private void BuildBlocks()
         {
             var files = Directory.GetFiles(pathToTermsAndDocIds);
@@ -62,6 +69,9 @@ namespace InverseIndex
             });
         }
 
+        /// <summary>
+        /// Merging blocks into one.
+        /// </summary>
         private void MergeBlocks()
         {
 
