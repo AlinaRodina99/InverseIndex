@@ -31,6 +31,19 @@ namespace InverseIndex
 
             var tokenization = new Tokenization(pathToCorpus, pathToTokenizedCorpus);
             tokenization.Tokenize();
+
+            var pathToTermsAndDocIds = SpecifyValue("path to terms and documents id");
+            if (pathToTermsAndDocIds == "")
+            {
+                pathToTermsAndDocIds = Directory.GetCurrentDirectory() + "/../../../../TermsAndDocIds";
+            }
+            Directory.CreateDirectory(pathToTermsAndDocIds);
+
+            var stemmer = new Stemmer(pathToTokenizedCorpus, pathToTermsAndDocIds);
+            stemmer.GetLemmas();
+
+            var buildingIndex = new Spimi(pathToTermsAndDocIds);
+            buildingIndex.BuildIndex();
         }
 
         /// <summary>
