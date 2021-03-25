@@ -46,8 +46,7 @@ namespace InverseIndex
                     {
                         foreach (var token in tokenizer.Tokenize())
                         {
-                            streamWriter.Write(token + " " + Path.GetFileName(corpusFile).Substring(4, corpusFile.IndexOf('.')));
-                            streamWriter.WriteLine();
+                            streamWriter.WriteLine(token + " " + Path.GetFileNameWithoutExtension(corpusFile).Substring(4));
                         }
                     }
                 }
