@@ -44,6 +44,20 @@ namespace InverseIndex
 
             var buildingIndex = new Spimi(pathToTermsAndDocIds);
             buildingIndex.BuildIndex();
+
+            Console.WriteLine("Enter your query.");
+            var input = Console.ReadLine();
+            var parsedInput = "";
+            try
+            {
+                var parser = new Parser(input);
+                parsedInput = parser.Parse();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Incorrect query.");
+            }
+            
         }
 
         /// <summary>
@@ -63,7 +77,7 @@ namespace InverseIndex
 
             if (input == "Y" || input == "y")
             {
-                Console.WriteLine($"Enter the {specifyingValue}");
+                Console.WriteLine($"Enter the {specifyingValue}.");
                 return Console.ReadLine();
             }
 
