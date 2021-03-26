@@ -17,6 +17,9 @@ namespace InverseIndex
         /// <param name="input">Input string</param>
         public Parser(string input)
         {
+            input = input.Replace("AND", "&");
+            input = input.Replace("OR", "|");
+            input = input.Replace("NOT", "-");
             this.input = input;
         }
 
