@@ -99,6 +99,12 @@ namespace InverseIndex
                 output += pop;
             }
 
+            // removes double NOT
+            while (output.IndexOf("- -") >= 0)
+            {
+                output = output.Remove(output.IndexOf("- -"), 4);
+            }
+
             return output;
         }
     }

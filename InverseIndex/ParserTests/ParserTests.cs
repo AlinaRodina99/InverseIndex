@@ -33,7 +33,7 @@ namespace ParserTests
         public void DoubleNOTParseTest()
         {
             parser = new Parser("- - word1");
-            Assert.AreEqual("word1 - - ", parser.Parse());
+            Assert.AreEqual("word1 ", parser.Parse());
         }
 
         [Test]
@@ -51,6 +51,13 @@ namespace ParserTests
         }
 
         [Test]
+        public void ManyParenthesisParseTest()
+        {
+            parser = new Parser("(((((((word1 | word2) & word3) | word4) & word5) | word6) & word7) | word8) & word9");
+            Assert.AreEqual("word1 word2 | word3 & word4 | word5 & word6 | word7 & word8 | word9 & ", parser.Parse());
+        }
+
+        [Test]
         public void SomeParseTest()
         {
             parser = new Parser("- (word1 | word2) & word3");
@@ -61,7 +68,7 @@ namespace ParserTests
         public void AnotherParseTest()
         {
             parser = new Parser("word1 | - - (word2 & word3 & - word4) & word5");
-            Assert.AreEqual("word1 word2 word3 & word4 - & - - word5 & | ", parser.Parse());
+            Assert.AreEqual("word1 word2 word3 & word4 - & word5 & | ", parser.Parse());
         }
 
         [Test]
