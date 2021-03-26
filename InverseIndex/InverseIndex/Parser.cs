@@ -27,6 +27,10 @@ namespace InverseIndex
         /// <returns>String without spaces</returns>
         private string RemoveSpaces(string input) => string.Concat(input.Where(c => !char.IsWhiteSpace(c)));
 
+        /// <summary>
+        /// Parses input to reversed polish notation
+        /// </summary>
+        /// <returns>Input in reversed polish notation</returns>
         public string Parse()
         {
             var output = "";
