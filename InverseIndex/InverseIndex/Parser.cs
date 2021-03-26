@@ -112,7 +112,7 @@ namespace InverseIndex
                 output = output.Remove(output.IndexOf("- -"), 4);
             }
 
-            return output;
+            return output.Trim();
         }
     }
 }
