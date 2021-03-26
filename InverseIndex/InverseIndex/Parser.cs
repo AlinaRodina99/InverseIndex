@@ -31,6 +31,13 @@ namespace InverseIndex
         private string RemoveSpaces(string input) => string.Concat(input.Where(c => !char.IsWhiteSpace(c)));
 
         /// <summary>
+        /// Removes double NOT in given string
+        /// </summary>
+        /// <param name="input">Given string</param>
+        /// <returns>String without double NOT's</returns>
+        private string RemoveDoubleNot(string input) => input.Replace("- - ", "");
+
+        /// <summary>
         /// Parses input to reversed polish notation
         /// </summary>
         /// <returns>Input in reversed polish notation</returns>
@@ -105,12 +112,7 @@ namespace InverseIndex
                 }
                 output += pop;
             }
-
-            // removes double NOT
-            while (output.IndexOf("- -") >= 0)
-            {
-                output = output.Remove(output.IndexOf("- -"), 4);
-            }
+            output = RemoveDoubleNot(output);
 
             return output.Trim();
         }

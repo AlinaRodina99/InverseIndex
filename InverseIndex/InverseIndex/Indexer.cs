@@ -57,7 +57,6 @@ namespace InverseIndex
             {
                 Console.WriteLine("Incorrect query.");
             }
-            
         }
 
         /// <summary>
