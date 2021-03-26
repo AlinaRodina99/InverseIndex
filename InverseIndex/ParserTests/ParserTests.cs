@@ -37,6 +37,20 @@ namespace ParserTests
         }
 
         [Test]
+        public void ManyNOTParseTest()
+        {
+            parser = new Parser("- - - - - - word1");
+            Assert.AreEqual("word1 ", parser.Parse());
+        }
+
+        [Test]
+        public void AnotherManyNOTParseTest()
+        {
+            parser = new Parser("- - - - - - - word1");
+            Assert.AreEqual("word1 - ", parser.Parse());
+        }
+
+        [Test]
         public void SimpleParenthesisParseTest()
         {
             parser = new Parser("(word1 | word2) & word3");
