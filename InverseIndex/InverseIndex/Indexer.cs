@@ -29,8 +29,8 @@ namespace InverseIndex
             }
             Directory.CreateDirectory(pathToTokenizedCorpus);
 
-            var tokenization = new Tokenization(pathToCorpus, pathToTokenizedCorpus);
-            tokenization.Tokenize();
+            var tokenizer = new Tokenizer(pathToCorpus, pathToTokenizedCorpus);
+            tokenizer.Tokenize();
 
             var pathToTermsAndDocIds = SpecifyValue("path to terms and documents id");
             if (pathToTermsAndDocIds == "")

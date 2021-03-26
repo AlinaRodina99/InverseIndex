@@ -8,17 +8,17 @@ namespace InverseIndex
     /// <summary>
     /// Tokenization
     /// </summary>
-    public class Tokenization
+    public class Tokenizer
     {
         private string pathToCorpus;
         private string pathToTokenizedCorpus;
 
         /// <summary>
-        /// Tokenization constuctor
+        /// Tokenizer constuctor
         /// </summary>
         /// <param name="pathToCorpus">Path to corpus</param>
         /// <param name="pathToTokenizedCorpus">Path to tokenized corpus</param>
-        public Tokenization(string pathToCorpus, string pathToTokenizedCorpus)
+        public Tokenizer(string pathToCorpus, string pathToTokenizedCorpus)
         {
             if (!Directory.Exists(pathToCorpus))
             {
