@@ -55,34 +55,34 @@ namespace InverseIndex
                         }
                     case '&':
                         {
-                            while (stack.Peek() == "-")
+                            while (stack.Count > 0 && (stack.Peek() == "- " || stack.Peek() == "& "))
                             {
                                 output += stack.Pop();
                             }
-                            stack.Push("&");
+                            stack.Push("& ");
                             break;
                         }
                     case '|':
                         {
-                            while (stack.Peek() == "&" || stack.Peek() == "-")
+                            while (stack.Count > 0 && (stack.Peek() == "& " || stack.Peek() == "- " || stack.Peek() == "| "))
                             {
                                 output += stack.Pop();
                             }
-                            stack.Push("|");
+                            stack.Push("| ");
                             break;
                         }
                     case '-':
                         {
-                            stack.Push("-");
+                            stack.Push("- ");
                             break;
                         }
                     default:
                         {
                             word += input[i];
-                            if (i != input.Length - 1 && (input[i + 1] == '(' || input[i + 1] == ')' || input[i + 1] == '-' || input[i + 1] == '&' ||
-                                input[i + 1] == '|'))
+                            if (i == input.Length - 1 || input[i + 1] == '(' || input[i + 1] == ')' || input[i + 1] == '-' || input[i + 1] == '&' ||
+                                input[i + 1] == '|')
                             {
-                                output += word;
+                                output += word + " ";
                                 word = "";
                             }
                             break;
