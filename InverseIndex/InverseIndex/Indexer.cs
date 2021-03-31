@@ -29,8 +29,8 @@ namespace InverseIndex
             }
             Directory.CreateDirectory(pathToTokenizedCorpus);
 
-            var tokenizer = new Tokenizer(pathToCorpus, pathToTokenizedCorpus);
-            tokenizer.Tokenize();
+            var tokenization = new Tokenizer(pathToCorpus, pathToTokenizedCorpus);
+            tokenization.Tokenize();
 
             var pathToTermsAndDocIds = SpecifyValue("path to terms and documents id");
             if (pathToTermsAndDocIds == "")
@@ -42,7 +42,14 @@ namespace InverseIndex
             var stemmer = new Stemmer(pathToTokenizedCorpus, pathToTermsAndDocIds);
             stemmer.GetLemmas();
 
-            var buildingIndex = new Spimi(pathToTermsAndDocIds);
+            var pathToIndex = SpecifyValue("path to index");
+            if (pathToIndex == "")
+            {
+                pathToIndex = Directory.GetCurrentDirectory() + "/../../../../Index.txt";
+            }
+            File.Create(pathToIndex);
+
+            var buildingIndex = new Spimi(pathToTermsAndDocIds, pathToIndex);
             buildingIndex.BuildIndex();
 
             Console.WriteLine("Enter your query.");
@@ -53,7 +60,7 @@ namespace InverseIndex
                 var parser = new Parser(input);
                 parsedInput = parser.Parse();
             }
-            catch (Exception e)
+            catch
             {
                 Console.WriteLine("Incorrect query.");
             }
@@ -76,7 +83,7 @@ namespace InverseIndex
 
             if (input == "Y" || input == "y")
             {
-                Console.WriteLine($"Enter the {specifyingValue}.");
+                Console.WriteLine($"Enter the {specifyingValue}");
                 return Console.ReadLine();
             }
 

@@ -36,7 +36,7 @@ namespace InverseIndex
         /// </summary>
         public void Tokenize()
         {
-            string[] corpusFiles = Directory.GetFiles(pathToCorpus);
+            var corpusFiles = Directory.GetFiles(pathToCorpus);
             Parallel.ForEach(corpusFiles, corpusFile =>
             {
                 var tokenizer = new TextTokenizer(File.ReadAllText(corpusFile));
