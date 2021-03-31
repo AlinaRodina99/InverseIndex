@@ -3,7 +3,45 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31019.35
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InverseIndex", "InverseIndex\InverseIndex.csproj", "{03EA719C-5C93-474E-85CF-FD28FE0EB331}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InverseIndex", "InverseIndex\InverseIndex.csproj", "{03EA719C-5C93-474E-85CF-FD28FE0EB331}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Corpus", "Corpus", "{6005D8AE-8F6C-46BF-AB6E-C174F3909F71}"
+	ProjectSection(SolutionItems) = preProject
+		Corpus\text0.txt = Corpus\text0.txt
+		Corpus\text1.txt = Corpus\text1.txt
+		Corpus\text10.txt = Corpus\text10.txt
+		Corpus\text11.txt = Corpus\text11.txt
+		Corpus\text12.txt = Corpus\text12.txt
+		Corpus\text13.txt = Corpus\text13.txt
+		Corpus\text14.txt = Corpus\text14.txt
+		Corpus\text15.txt = Corpus\text15.txt
+		Corpus\text16.txt = Corpus\text16.txt
+		Corpus\text17.txt = Corpus\text17.txt
+		Corpus\text18.txt = Corpus\text18.txt
+		Corpus\text19.txt = Corpus\text19.txt
+		Corpus\text2.txt = Corpus\text2.txt
+		Corpus\text20.txt = Corpus\text20.txt
+		Corpus\text21.txt = Corpus\text21.txt
+		Corpus\text22.txt = Corpus\text22.txt
+		Corpus\text23.txt = Corpus\text23.txt
+		Corpus\text24.txt = Corpus\text24.txt
+		Corpus\text25.txt = Corpus\text25.txt
+		Corpus\text26.txt = Corpus\text26.txt
+		Corpus\text27.txt = Corpus\text27.txt
+		Corpus\text28.txt = Corpus\text28.txt
+		Corpus\text29.txt = Corpus\text29.txt
+		Corpus\text3.txt = Corpus\text3.txt
+		Corpus\text4.txt = Corpus\text4.txt
+		Corpus\text5.txt = Corpus\text5.txt
+		Corpus\text6.txt = Corpus\text6.txt
+		Corpus\text7.txt = Corpus\text7.txt
+		Corpus\text8.txt = Corpus\text8.txt
+		Corpus\text9.txt = Corpus\text9.txt
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParserTests", "ParserTests\ParserTests.csproj", "{C7C57BE8-5507-436A-A248-F08BEFA1EDC4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestsOfIndexAlgorithm", "TestsOfIndexAlgorithm\TestsOfIndexAlgorithm.csproj", "{15E0CA7B-2D91-4240-8CAC-89DEBB88C882}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +53,14 @@ Global
 		{03EA719C-5C93-474E-85CF-FD28FE0EB331}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03EA719C-5C93-474E-85CF-FD28FE0EB331}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03EA719C-5C93-474E-85CF-FD28FE0EB331}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7C57BE8-5507-436A-A248-F08BEFA1EDC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7C57BE8-5507-436A-A248-F08BEFA1EDC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7C57BE8-5507-436A-A248-F08BEFA1EDC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7C57BE8-5507-436A-A248-F08BEFA1EDC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15E0CA7B-2D91-4240-8CAC-89DEBB88C882}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15E0CA7B-2D91-4240-8CAC-89DEBB88C882}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15E0CA7B-2D91-4240-8CAC-89DEBB88C882}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15E0CA7B-2D91-4240-8CAC-89DEBB88C882}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

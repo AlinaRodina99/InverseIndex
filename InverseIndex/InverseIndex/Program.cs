@@ -2,11 +2,12 @@
 
 namespace InverseIndex
 {
-    public class Program
+    public static class Program
     {
         public static void Main()
         {
-            Console.WriteLine("Hello World!");
+            var indexer = new Indexer();
+            indexer.Start();
         }
     }
 }

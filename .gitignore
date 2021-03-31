@@ -90,6 +90,7 @@ StyleCopReport.xml
 *.pidb
 *.svclog
 *.scc
+*.suo
 
 # Chutzpah Test files
 _Chutzpah*
@@ -344,3 +345,7 @@ ASALocalRun/
 # BeatPulse healthcheck temp database
 healthchecksdb
 
+# Generated texts
+TokenizedCorpus
+TermsAndDocIds
+InverseIndex/.vs/InverseIndex/v16/.suo
