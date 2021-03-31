@@ -349,3 +349,4 @@ healthchecksdb
 TokenizedCorpus
 TermsAndDocIds
 InverseIndex/.vs
+index.txt
