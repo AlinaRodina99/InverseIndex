@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31112.23
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Inverse_Index", "Inverse_Index\Inverse_Index.csproj", "{6601162A-3A31-4EE3-800E-A14B476CEEFF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestsOfIndexAlgorithm", "TestsOfIndexAlgorithm\TestsOfIndexAlgorithm.csproj", "{AEA9C7D2-CCA2-4811-B46C-B811C6863856}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6601162A-3A31-4EE3-800E-A14B476CEEFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6601162A-3A31-4EE3-800E-A14B476CEEFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6601162A-3A31-4EE3-800E-A14B476CEEFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6601162A-3A31-4EE3-800E-A14B476CEEFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEA9C7D2-CCA2-4811-B46C-B811C6863856}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEA9C7D2-CCA2-4811-B46C-B811C6863856}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEA9C7D2-CCA2-4811-B46C-B811C6863856}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEA9C7D2-CCA2-4811-B46C-B811C6863856}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E8ED3073-1D81-4F3D-9FC3-F8216D7412BD}
+	EndGlobalSection
+EndGlobal

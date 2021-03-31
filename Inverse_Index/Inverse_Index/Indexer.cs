@@ -42,7 +42,14 @@ namespace InverseIndex
             var stemmer = new Stemmer(pathToTokenizedCorpus, pathToTermsAndDocIds);
             stemmer.GetLemmas();
 
-            var buildingIndex = new Spimi(pathToTermsAndDocIds);
+            var pathToIndex = SpecifyValue("path to index");
+            if (pathToIndex == "")
+            {
+                pathToIndex = Directory.GetCurrentDirectory() + "/../../../../Index.txt";
+            }
+            File.Create(pathToIndex);
+
+            var buildingIndex = new Spimi(pathToTermsAndDocIds, pathToIndex);
             buildingIndex.BuildIndex();
         }
 
