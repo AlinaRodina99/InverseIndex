@@ -42,7 +42,7 @@ namespace InverseIndex
                 var tokenizer = new TextTokenizer(File.ReadAllText(corpusFile));
                 try
                 {
-                    using (StreamWriter streamWriter = File.CreateText(pathToTokenizedCorpus + @"\tokenized_" + Path.GetFileName(corpusFile)))
+                    using (var streamWriter = File.CreateText(pathToTokenizedCorpus + @"\tokenized_" + Path.GetFileName(corpusFile)))
                     {
                         foreach (var token in tokenizer.Tokenize())
                         {
