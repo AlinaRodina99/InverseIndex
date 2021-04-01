@@ -47,8 +47,10 @@ namespace InverseIndex
             var stack = new Stack<string>();
             input = RemoveSpaces(input);
             var word = "";
+            var amountOfWords = 0;
+            var amountOfAndsAndOrs = 0;
 
-            for (var i = 0; i < input.Length; i++)
+            for (var i = 0; i < input.Length; ++i)
             {
                 switch (input[i])
                 {
@@ -74,6 +76,7 @@ namespace InverseIndex
                                 output += stack.Pop();
                             }
                             stack.Push("& ");
+                            ++amountOfAndsAndOrs;
                             break;
                         }
                     case '|':
@@ -83,6 +86,7 @@ namespace InverseIndex
                                 output += stack.Pop();
                             }
                             stack.Push("| ");
+                            ++amountOfAndsAndOrs;
                             break;
                         }
                     case '-':
@@ -98,6 +102,7 @@ namespace InverseIndex
                             {
                                 output += word + " ";
                                 word = "";
+                                ++amountOfWords;
                             }
                             break;
                         }
@@ -112,6 +117,12 @@ namespace InverseIndex
                 }
                 output += pop;
             }
+
+            if (amountOfWords != amountOfAndsAndOrs + 1)
+            {
+                throw new ArgumentException();
+            }
+
             output = RemoveDoubleNot(output);
 
             return output.Trim();

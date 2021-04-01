@@ -105,5 +105,19 @@ namespace ParserTests
             parser = new Parser("NOT word1 OR word2 ) AND word3");
             Assert.Throws<InvalidOperationException>(() => parser.Parse());
         }
+
+        [Test]
+        public void OneMoreInvalidInputParseTest()
+        {
+            parser = new Parser("NOT word1 OR word2 AND word3 AND");
+            Assert.Throws<ArgumentException>(() => parser.Parse());
+        }
+
+        [Test]
+        public void AnotherOneMoreInvalidInputParseTest()
+        {
+            parser = new Parser("NOT OR word1 OR word2 AND word3");
+            Assert.Throws<ArgumentException>(() => parser.Parse());
+        }
     }
 }
