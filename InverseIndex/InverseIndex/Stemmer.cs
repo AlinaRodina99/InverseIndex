@@ -37,7 +37,7 @@ namespace InverseIndex
             {
                 try
                 {
-                    using (var streamWriter = new StreamWriter($"{pathToTermsAndDocIds}/lemmas{tokenizedFile.Substring(tokenizedFile.IndexOf('_'))}", false, Encoding.Default))
+                    using (var streamWriter = new StreamWriter($"{pathToTermsAndDocIds}\\lemmas{Path.GetFileNameWithoutExtension(tokenizedFile).Substring(4)}", false, Encoding.Default))
                     {
                         var tokensAndDocIds = new List<string>();
                         using (var streamReader = new StreamReader($"{pathToTokenizedCorpus}/{tokenizedFile}"))
