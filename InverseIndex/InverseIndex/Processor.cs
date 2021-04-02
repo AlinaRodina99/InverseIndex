@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -12,8 +13,6 @@ namespace InverseIndex
     public class Processor
     {
         private string pathToIndex;
-        private CancellationTokenSource cancellationToken = new CancellationTokenSource();
-        private string line;
 
         /// <summary>
         /// Query's processor constructor
@@ -28,46 +27,29 @@ namespace InverseIndex
         /// Finds the line containing given term in a file with index
         /// </summary>
         /// <param name="term">Term to find</param>
-        /// <returns>Line containing given term</returns>
-        private async Task<string> FindLineWithTerm(string term)
-        {
-            var streamReader = new StreamReader(pathToIndex);
-            await Task.WhenAny(new[] { Cancel(), ReadLineFromFileAsync(streamReader, term), ReadLineFromFileAsync(streamReader, term), 
-                ReadLineFromFileAsync(streamReader, term), ReadLineFromFileAsync(streamReader, term) });
-            return line;
-        }
-
-        /// <summary>
-        /// Cancels cancellation token
-        /// </summary>
-        /// <returns></returns>
-        private Task Cancel() => Task.Run(() => cancellationToken.Cancel());
-
-        private async Task ReadLineFromFileAsync(StreamReader streamReader, string term)
+        /// <returns>Line containing given term, null if there is no line containing given term</returns>
+        private string FindLineWithTerm(string term)
         {
             try
             {
-                using (streamReader)
+                using (var fileStream = File.Open(pathToIndex, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                using (var buferredStream = new BufferedStream(fileStream))
+                using (var streamReader = new StreamReader(buferredStream))
                 {
-                    while (!cancellationToken.IsCancellationRequested)
+                    var line = "";
+                    do
                     {
-                        var currentLine = await streamReader.ReadLineAsync();
-                        if (currentLine.Contains(term))
-                        {
-                            var terms = currentLine.Split(' ');
-                            if (terms[0] == term)
-                            {
-                                line = currentLine;
-                                cancellationToken.Cancel();
-                            }
-                        }
+                        line = streamReader.ReadLine();
                     }
+                    while (!line.StartsWith(term) && line.Split(' ')[0] != term);
+                    return line;
                 }
             }
             catch (Exception exception)
             {
-                Console.WriteLine(exception.ToString());
+                Console.WriteLine(exception.Message);
             }
+            return null;
         }
 
         private void AndOperation(string term1, string term2)
