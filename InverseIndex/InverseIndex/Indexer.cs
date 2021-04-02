@@ -64,6 +64,9 @@ namespace InverseIndex
             {
                 Console.WriteLine("Incorrect query.");
             }
+
+            var processor = new Processor(pathToIndex);
+            processor.Process(parsedInput);
         }
 
         /// <summary>

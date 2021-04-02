@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace InverseIndex
@@ -11,6 +12,8 @@ namespace InverseIndex
     public class Processor
     {
         private string pathToIndex;
+        private CancellationTokenSource cancellationToken = new CancellationTokenSource();
+        private string line;
 
         /// <summary>
         /// Query's processor constructor
@@ -28,19 +31,35 @@ namespace InverseIndex
         /// <returns>Line containing given term</returns>
         private async Task<string> FindLineWithTerm(string term)
         {
+            var streamReader = new StreamReader(pathToIndex);
+            await Task.WhenAny(new[] { Cancel(), ReadLineFromFileAsync(streamReader, term), ReadLineFromFileAsync(streamReader, term), 
+                ReadLineFromFileAsync(streamReader, term), ReadLineFromFileAsync(streamReader, term) });
+            return line;
+        }
+
+        /// <summary>
+        /// Cancels cancellation token
+        /// </summary>
+        /// <returns></returns>
+        private Task Cancel() => Task.Run(() => cancellationToken.Cancel());
+
+        private async Task ReadLineFromFileAsync(StreamReader streamReader, string term)
+        {
             try
             {
-                using (var streamReader = new StreamReader(pathToIndex))
+                using (streamReader)
                 {
-                    var isFound = false;
-                    while (!isFound)
+                    while (!cancellationToken.IsCancellationRequested)
                     {
-                        var currentLine = streamReader.ReadLineAsync();
+                        var currentLine = await streamReader.ReadLineAsync();
                         if (currentLine.Contains(term))
-                        if (termsInLine[0] == term)
                         {
-                            isFound = true;
-                            return currentLine;
+                            var terms = currentLine.Split(' ');
+                            if (terms[0] == term)
+                            {
+                                line = currentLine;
+                                cancellationToken.Cancel();
+                            }
                         }
                     }
                 }
@@ -49,8 +68,6 @@ namespace InverseIndex
             {
                 Console.WriteLine(exception.ToString());
             }
-
-            return null;
         }
 
         private void AndOperation(string term1, string term2)
