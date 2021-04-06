@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace InverseIndex
 {
@@ -13,14 +11,16 @@ namespace InverseIndex
     public class Processor
     {
         private string pathToIndex;
+        private int[] docsIds;
 
         /// <summary>
         /// Query's processor constructor
         /// </summary>
         /// <param name="pathToIndex">Path to built index</param>
-        public Processor(string pathToIndex)
+        public Processor(string pathToIndex, int[] docsIds)
         {
             this.pathToIndex = pathToIndex;
+            this.docsIds = docsIds;
         }
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace InverseIndex
                 return (element1, element2, 3);
             }
 
-            var docsWithTerm1 = element1.Any(char.IsLetter) ? string.Join(' ', FindLineWithTerm(element1).Skip(2)) : element1;
+            var docsWithTerm1 = element1.Any(char.IsLetter) ? string.Join(' ', FindLineWithTerm(element1).Split(' ').Skip(2)) : element1;
             var docsWithTerm2 = element2.Any(char.IsLetter) ? string.Join(' ', FindLineWithTerm(element2).Split(' ').Skip(2)) : element2;
             if (element1 != "" && element2 != "")
             {
@@ -133,7 +133,29 @@ namespace InverseIndex
             }
         }
 
-        public void Process(string query)
+        /// <summary>
+        /// Executes NOT operation on element
+        /// </summary>
+        /// <param name="element">Element</param>
+        /// <returns>Result of NOT operation</returns>
+        private string NotOperation(string element)
+        {
+            if (element == "")
+            {
+                return string.Join(' ', docsIds);
+            }
+
+            var line = FindLineWithTerm(element);
+            var docsWithTerm = element.Any(char.IsLetter) ? FindLineWithTerm(element).Split(' ').Skip(2).ToArray() : element.Split(' ');
+            return string.Join(' ', docsIds.Except(Array.ConvertAll(docsWithTerm, int.Parse)));
+        }
+
+        /// <summary>
+        /// Processes given query
+        /// </summary>
+        /// <param name="query">Given query</param>
+        /// <returns>String with docs' ids according to query</returns>
+        public string Process(string query)
         {
             var terms = query.Split(' ');
 
@@ -146,19 +168,20 @@ namespace InverseIndex
                         {
                             var element1 = stack.Pop();
                             var element2 = stack.Pop();
-
-                            stack.Push();
+                            stack.Push(AndOperation(element1, element2));
                             break;
                         }
                     case "|":
                         {
                             var element1 = stack.Pop();
                             var element2 = stack.Pop();
+                            stack.Push(OrOperation(element1, element2));
                             break;
                         }
                     case "-":
                         {
                             var element = stack.Pop();
+                            stack.Push(NotOperation(element));
                             break;
                         }
                     default:
@@ -167,34 +190,14 @@ namespace InverseIndex
                             break;
                         }
                 }
-                if (terms[i] == "&" || terms[i] == '-' || terms[i] == '*' || terms[i] == '/')
-                {
-                    var value1 = stack.Pop();
-                    var value2 = stack.Pop();
-                    stack.Push(OparationResult(str[i], value1, value2));
-                }
-                else if (i < str.Length - 1 && Char.IsNumber(str[i]) && Char.IsNumber(str[i + 1]))
-                {
-                    number = number * 10 + (int)Char.GetNumericValue(str[i]);
-                }
-                else if (i > 0 && Char.IsNumber(str[i - 1]) && Char.IsNumber(str[i]))
-                {
-                    number = number * 10 + (int)Char.GetNumericValue(str[i]);
-                    stack.Push(number);
-                    number = 0;
-                }
-                else
-                {
-                    stack.Push((int)Char.GetNumericValue(str[i]));
-                }
             }
-            if (stack.Length() == 1)
+            if (stack.Count == 1)
             {
                 return stack.Pop();
             }
             else
             {
-                throw new InvalidOperationException("Invalid string");
+                throw new ArgumentException();
             }
         }
     }
