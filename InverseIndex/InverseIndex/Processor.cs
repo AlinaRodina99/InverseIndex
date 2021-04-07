@@ -193,7 +193,8 @@ namespace InverseIndex
             }
             if (stack.Count == 1)
             {
-                return stack.Pop();
+                var result = stack.Pop();
+                return result.Any(char.IsLetter) ? string.Join(' ', FindLineWithTerm(result).Split(' ').Skip(2)) : result;
             }
             else
             {
