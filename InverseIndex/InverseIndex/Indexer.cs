@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 
 namespace InverseIndex
 {
@@ -64,6 +65,9 @@ namespace InverseIndex
             {
                 Console.WriteLine("Incorrect query.");
             }
+
+            var processor = new Processor(pathToIndex, Enumerable.Range(0, Directory.GetFiles(pathToCorpus).Length).ToArray());
+            Console.WriteLine($"Documents' ids: {processor.Process(parsedInput)}");
         }
 
         /// <summary>
