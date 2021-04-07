@@ -4,6 +4,7 @@ using System.Text;
 using System.IO;
 using Porter2Stemmer;
 using System.Threading.Tasks;
+using System.Collections.Concurrent;
 
 namespace InverseIndex
 {
@@ -33,25 +34,24 @@ namespace InverseIndex
         {
             var stemmer = new EnglishPorter2Stemmer();
             var tokenizedFiles = Directory.GetFiles(pathToTokenizedCorpus);
+            var locker = new object();
             Parallel.ForEach(tokenizedFiles, tokenizedFile =>
             {
                 try
                 {
-                    using (var streamWriter = new StreamWriter($"{pathToTermsAndDocIds}/lemmas{tokenizedFile.Substring(tokenizedFile.IndexOf('_'))}", false, Encoding.Default))
+                    using (var streamWriter = new StreamWriter($"{pathToTermsAndDocIds}\\lemmas{Path.GetFileNameWithoutExtension(Path.GetFileName(tokenizedFile)).Substring(4)}.txt", false, Encoding.Default))
                     {
-                        var tokensAndDocIds = new List<string>();
-                        using (var streamReader = new StreamReader($"{pathToTokenizedCorpus}/{tokenizedFile}"))
+                        var tokensAndDocIds = new BlockingCollection<string>();
+                        var lines = File.ReadAllLines(tokenizedFile);
+                        foreach (var line in lines)
                         {
-                            while (streamReader.ReadLine() != null)
-                            {
-                                tokensAndDocIds.Add(streamReader.ReadLine());
-                            }
+                            tokensAndDocIds.Add(line);
                         }
 
                         foreach (var tokenAndDocId in tokensAndDocIds)
                         {
                             var token = tokenAndDocId.Split(' ')[0];
-                            streamWriter.Write(stemmer.Stem(token) + $" {tokenAndDocId.Split(' ')[1]}");
+                            streamWriter.Write(stemmer.Stem(token).Value + $" {tokenAndDocId.Split(' ')[1]}");
                             streamWriter.WriteLine();
                         }
                     }
