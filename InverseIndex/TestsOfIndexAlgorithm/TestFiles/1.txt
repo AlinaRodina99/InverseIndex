@@ -1,0 +1,6 @@
+the 1
+capital 3
+milk 2
+cat 2
+logic 3
+you 15

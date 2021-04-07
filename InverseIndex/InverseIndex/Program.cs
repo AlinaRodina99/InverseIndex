@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Porter2Stemmer;
 
 namespace InverseIndex
 {
@@ -7,11 +8,12 @@ namespace InverseIndex
     {
         public static void Main()
         {
-            var path1 = Directory.GetCurrentDirectory() + "/../../../TestFiles";
-            var path2 = Directory.GetCurrentDirectory() + "/../../../Terms";
+            var path1 = "C:\\Users\\HP\\inverse_index\\InverseIndex\\InverseIndex\\TestFiles";
+            var path2 = "C:\\Users\\HP\\inverse_index\\InverseIndex\\InverseIndex\\Terms";
+            var path3 = "C:\\Users\\HP\\inverse_index\\InverseIndex\\InverseIndex\\Index\\index.txt";
             var stemmer = new Stemmer(path1, path2);
             stemmer.GetLemmas();
-            var spimi = new Spimi(path1, $"{Directory.GetCurrentDirectory()} + /../../../Index/index_file.txt");
+            var spimi = new Spimi(path2, path3);
             spimi.BuildIndex();
         }
     }
