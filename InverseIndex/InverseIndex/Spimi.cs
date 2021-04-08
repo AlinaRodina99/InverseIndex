@@ -33,27 +33,17 @@ namespace InverseIndex
         /// </summary>
         private void BuildBlocks()
         {
-<<<<<<< HEAD
             var stemmedFiles = Directory.GetFiles(pathToTermsAndDocIds);
             var dictionary = new Dictionary<string, List<int>>();
-=======
-            var files = Directory.GetFiles(pathToTermsAndDocIds);
->>>>>>> 671bf9ffe238626f1c8e148a083dac620da891d3
             var locker = new object();
 
             Parallel.ForEach(stemmedFiles, stemmedFile =>
             {
-<<<<<<< HEAD
                 var lines = File.ReadAllLines(stemmedFile);
-=======
-                var dictionary = new ConcurrentDictionary<string, List<int>>();
-                var lines = File.ReadAllLines(file);
->>>>>>> 671bf9ffe238626f1c8e148a083dac620da891d3
                 foreach (var line in lines)
                 {
                     var term = line.Split(' ')[0];
                     var docId = Convert.ToInt32(line.Split(' ')[1]);
-<<<<<<< HEAD
 
                     lock (locker)
                     {
@@ -68,38 +58,14 @@ namespace InverseIndex
                         }
                     }
                 }
-            });
 
-            foreach (var postingList in dictionary.Values)
-            {
-                postingList.Sort();
-            }
-
-            var sortedDictionary = new SortedDictionary<string, List<int>>(dictionary);
-
-            Parallel.ForEach(stemmedFiles, stemmedFile =>
-            {
-                using (var streamWriter = File.CreateText(stemmedFile))
-=======
-                    if (!dictionary.ContainsKey(term))
-                    {
-                        dictionary.TryAdd(term, new List<int>());
-                    }
-
-                    if (dictionary.TryGetValue(term, out List<int> value))
-                    {
-                        value.Add(docId);
-                    }
-                }
-                    
                 foreach (var postingList in dictionary.Values)
                 {
                     postingList.Sort();
                 }
-                    
+
                 var sortedDictionary = new SortedDictionary<string, List<int>>(dictionary);
-                using (var streamWriter = new StreamWriter($"{file}", false, Encoding.Default))
->>>>>>> 671bf9ffe238626f1c8e148a083dac620da891d3
+                using (var streamWriter = File.CreateText(stemmedFile))
                 {
                     foreach (var element in sortedDictionary)
                     {
@@ -126,26 +92,6 @@ namespace InverseIndex
 
             Parallel.ForEach(blocks, block =>
             {
-<<<<<<< HEAD
-                var lines = File.ReadAllLines(block);
-                foreach (var line in lines)
-                {
-                    var term = line.Split(' ')[0];
-                    var postingListString = line.Split(' ');
-                    var postingListInt = new List<int>();
-
-                    lock (locker)
-                    {
-                        foreach (var docId in postingListString)
-                        {
-                            postingListInt.Add(Convert.ToInt32(docId));
-                        }
-                    }
-
-                    lock (locker)
-                    {
-                        queue.Enqueue(postingListInt, term);
-=======
                 var streamReader = new StreamReader(block);
                 using (streamReader)
                 {
@@ -153,7 +99,6 @@ namespace InverseIndex
                     foreach (var line in lines)
                     {
                         listWithTermsAndPostingLists.Add(line);
->>>>>>> 671bf9ffe238626f1c8e148a083dac620da891d3
                     }
                 }
             });

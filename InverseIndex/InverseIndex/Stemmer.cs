@@ -39,22 +39,14 @@ namespace InverseIndex
             {
                 try
                 {
-                    using (var streamWriter = new StreamWriter($"{pathToTermsAndDocIds}/lemmas{tokenizedFile.Substring(tokenizedFile.IndexOf('_'))}", false, Encoding.Default))
-                    {
-                        var tokensAndDocIds = new List<string>();
-                        using (var streamReader = new StreamReader($"{pathToTokenizedCorpus}/{tokenizedFile}"))
-                        {
-                            while (streamReader.ReadLine() != null)
-                            {
-                                tokensAndDocIds.Add(streamReader.ReadLine());
-                            }
-                        }
+                    using (var streamWriter = File.CreateText(pathToTermsAndDocIds + @"\lemmas_" + Path.GetFileName(tokenizedFile).Substring(10)))
+                    { 
+                        var lines = File.ReadAllLines(tokenizedFile);
 
-                        foreach (var tokenAndDocId in tokensAndDocIds)
+                        foreach (var line in lines)
                         {
-                            var token = tokenAndDocId.Split(' ')[0];
-                            streamWriter.Write(stemmer.Stem(token) + $" {tokenAndDocId.Split(' ')[1]}");
-                            streamWriter.WriteLine();
+                            var token = line.Split(' ')[0];
+                            streamWriter.WriteLine(stemmer.Stem(token).Value + $" {line.Split(' ')[1]}");
                         }
                     }
                 }
