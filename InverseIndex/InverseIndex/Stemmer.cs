@@ -4,6 +4,7 @@ using System.Text;
 using System.IO;
 using Porter2Stemmer;
 using System.Threading.Tasks;
+using System.Collections.Concurrent;
 
 namespace InverseIndex
 {
@@ -37,22 +38,13 @@ namespace InverseIndex
             {
                 try
                 {
-                    using (var streamWriter = new StreamWriter($"{pathToTermsAndDocIds}/lemmas{tokenizedFile.Substring(tokenizedFile.IndexOf('_'))}", false, Encoding.Default))
+                    using (var streamWriter = File.CreateText(pathToTermsAndDocIds + @"\lemmas_" + Path.GetFileName(tokenizedFile).Substring(10)))
                     {
-                        var tokensAndDocIds = new List<string>();
-                        using (var streamReader = new StreamReader($"{pathToTokenizedCorpus}/{tokenizedFile}"))
+                        var lines = File.ReadAllLines(tokenizedFile);
+                        foreach (var line in lines)
                         {
-                            while (streamReader.ReadLine() != null)
-                            {
-                                tokensAndDocIds.Add(streamReader.ReadLine());
-                            }
-                        }
-
-                        foreach (var tokenAndDocId in tokensAndDocIds)
-                        {
-                            var token = tokenAndDocId.Split(' ')[0];
-                            streamWriter.Write(stemmer.Stem(token) + $" {tokenAndDocId.Split(' ')[1]}");
-                            streamWriter.WriteLine();
+                            var token = line.Split(' ')[0];
+                            streamWriter.WriteLine(stemmer.Stem(token).Value + $" {line.Split(' ')[1]}");
                         }
                     }
                 }
