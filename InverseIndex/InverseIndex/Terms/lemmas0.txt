@@ -1,0 +1,6 @@
+capit 3
+cat 2
+logic 3
+milk 2
+the 1
+you 15

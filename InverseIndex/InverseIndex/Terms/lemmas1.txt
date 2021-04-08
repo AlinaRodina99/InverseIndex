@@ -1,0 +1,8 @@
+arrog 9
+borrow 6
+dog 5
+eleph 10
+hair 2
+skate 4
+surpris 7
+you 10

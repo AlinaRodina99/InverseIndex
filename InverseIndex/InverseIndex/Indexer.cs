@@ -60,14 +60,13 @@ namespace InverseIndex
             {
                 var parser = new Parser(input);
                 parsedInput = parser.Parse();
+                var processor = new Processor(pathToIndex, Enumerable.Range(0, Directory.GetFiles(pathToCorpus).Length).ToArray());
+                Console.WriteLine($"Documents' ids: {processor.Process(parsedInput)}");
             }
             catch
             {
                 Console.WriteLine("Incorrect query.");
             }
-
-            var processor = new Processor(pathToIndex, Enumerable.Range(0, Directory.GetFiles(pathToCorpus).Length).ToArray());
-            Console.WriteLine($"Documents' ids: {processor.Process(parsedInput)}");
         }
 
         /// <summary>

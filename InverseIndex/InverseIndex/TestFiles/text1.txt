@@ -1,0 +1,8 @@
+borrow 6
+dog 5
+skating 4
+surprise 7
+elephant 10
+you 10
+hair 2
+arrogant 9
