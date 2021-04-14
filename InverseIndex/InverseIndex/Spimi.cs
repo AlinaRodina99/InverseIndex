@@ -34,25 +34,23 @@ namespace InverseIndex
         private void BuildBlocks()
         {
             var stemmedFiles = Directory.GetFiles(pathToTermsAndDocIds);
-            var dictionary = new Dictionary<string, List<int>>();
-            var locker = new object();
 
-            Parallel.ForEach(stemmedFiles, stemmedFile =>
-            {
+            foreach (var stemmedFile in stemmedFiles)
+            { 
                 var lines = File.ReadAllLines(stemmedFile);
+                var dictionary = new Dictionary<string, List<int>>();
                 foreach (var line in lines)
                 {
                     var term = line.Split(' ')[0];
                     var docId = Convert.ToInt32(line.Split(' ')[1]);
-
-                    lock (locker)
+                    if (!dictionary.ContainsKey(term))
                     {
-                        if (!dictionary.ContainsKey(term))
-                        {
-                            dictionary.TryAdd(term, new List<int>());
-                        }
+                        dictionary.Add(term, new List<int>());
+                    }
 
-                        if (dictionary.TryGetValue(term, out List<int> value))
+                    if (dictionary.TryGetValue(term, out List<int> value))
+                    {
+                        if (!value.Contains(docId))
                         {
                             value.Add(docId);
                         }
@@ -77,7 +75,7 @@ namespace InverseIndex
                         streamWriter.WriteLine();
                     }
                 }
-            });
+            }
         }
 
         /// <summary>

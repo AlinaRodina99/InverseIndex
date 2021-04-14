@@ -1,0 +1,4 @@
+capital 3
+grow 7
+dog 16
+skating 23

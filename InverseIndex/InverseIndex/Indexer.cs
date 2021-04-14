@@ -50,7 +50,7 @@ namespace InverseIndex
             }
             File.Create(pathToIndex);
 
-            var buildingIndex = new Spimi(pathToTermsAndDocIds, pathToIndex);
+            var buildingIndex = new Spimi(Directory.GetCurrentDirectory() + "/../../../../TermsAndDocIds", pathToIndex);
             buildingIndex.BuildIndex();
 
             Console.WriteLine("Enter your query.");
@@ -60,7 +60,7 @@ namespace InverseIndex
             {
                 var parser = new Parser(input);
                 parsedInput = parser.Parse();
-                var processor = new Processor(pathToIndex, Enumerable.Range(0, Directory.GetFiles(pathToCorpus).Length).ToArray());
+                var processor = new Processor(pathToIndex, Enumerable.Range(0, Directory.GetFiles(Directory.GetCurrentDirectory() + "/../../../../Corpus").Length).ToArray());
                 Console.WriteLine($"Documents' ids: {processor.Process(parsedInput)}");
             }
             catch

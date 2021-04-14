@@ -1,4 +1,6 @@
 using NUnit.Framework;
+using InverseIndex;
+using System.IO;
 
 namespace TestsOfIndexAlgorithm
 {
@@ -7,12 +9,15 @@ namespace TestsOfIndexAlgorithm
         [SetUp]
         public void Setup()
         {
+            stemmer = new Stemmer($"{Directory.GetCurrentDirectory()}", )
         }
 
         [Test]
         public void Test1()
         {
-            Assert.Pass();
+
         }
+
+        private Stemmer stemmer;
     }
 }
