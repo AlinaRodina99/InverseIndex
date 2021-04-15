@@ -14,6 +14,7 @@ namespace InverseIndex
         /// </summary>
         public void Start()
         {
+            Console.WriteLine();
             Console.WriteLine("Hello!");
             Console.WriteLine("This program processes given corpus and provides boolean search within it using created inverse index.");
 
@@ -52,6 +53,7 @@ namespace InverseIndex
             var buildingIndex = new Spimi(pathToTermsAndDocIds, pathToIndex);
             buildingIndex.BuildIndex();
 
+            Console.WriteLine();
             Console.WriteLine("Enter your query.");
             var input = Console.ReadLine();
             var parsedInput = "";
@@ -76,6 +78,7 @@ namespace InverseIndex
         /// <returns>Specified value if desired, empty string otherwise</returns>
         private string SpecifyValue(string specifyingValue)
         {
+            Console.WriteLine();
             Console.WriteLine($"Would you like to specify the {specifyingValue}? Y/N");
             Console.WriteLine($"NOTE: if N, default value will be used.");
             var input = Console.ReadLine();
