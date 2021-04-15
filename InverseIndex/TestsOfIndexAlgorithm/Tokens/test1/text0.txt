@@ -1,7 +1,0 @@
-grow 1
-bicycle 3
-skating 4
-ring 2
-dog 1
-elephant 1
-bird 3

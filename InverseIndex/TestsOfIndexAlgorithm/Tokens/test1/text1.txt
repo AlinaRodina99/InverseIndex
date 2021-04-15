@@ -1,4 +1,0 @@
-elephant 10
-bird 11
-car 1
-skating 9
