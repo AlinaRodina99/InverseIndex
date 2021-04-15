@@ -20,13 +20,13 @@ namespace InverseIndex
             var pathToCorpus = SpecifyValue("path to corpus");
             if (pathToCorpus == "")
             {
-                pathToCorpus = Directory.GetCurrentDirectory() + "/../../../../Corpus";
+                pathToCorpus = Directory.GetCurrentDirectory() + "/InverseIndex/Corpus";
             }
 
             var pathToTokenizedCorpus = SpecifyValue("path to tokenized corpus");
             if (pathToTokenizedCorpus == "")
             {
-                pathToTokenizedCorpus = Directory.GetCurrentDirectory() + "/../../../../TokenizedCorpus";
+                pathToTokenizedCorpus = Directory.GetCurrentDirectory() + "/InverseIndex/TokenizedCorpus";
             }
             Directory.CreateDirectory(pathToTokenizedCorpus);
 
@@ -36,7 +36,7 @@ namespace InverseIndex
             var pathToTermsAndDocIds = SpecifyValue("path to terms and documents id");
             if (pathToTermsAndDocIds == "")
             {
-                pathToTermsAndDocIds = Directory.GetCurrentDirectory() + "/../../../../TermsAndDocIds";
+                pathToTermsAndDocIds = Directory.GetCurrentDirectory() + "/InverseIndex/TermsAndDocIds";
             }
             Directory.CreateDirectory(pathToTermsAndDocIds);
 
@@ -46,10 +46,10 @@ namespace InverseIndex
             var pathToIndex = SpecifyValue("path to index");
             if (pathToIndex == "")
             {
-                pathToIndex = Directory.GetCurrentDirectory() + "/../../../../Index.txt";
+                pathToIndex = Directory.GetCurrentDirectory() + "/InverseIndex/Index.txt";
             }
 
-            var buildingIndex = new Spimi(Directory.GetCurrentDirectory() + "/../../../../TermsAndDocIds", pathToIndex);
+            var buildingIndex = new Spimi(pathToTermsAndDocIds, pathToIndex);
             buildingIndex.BuildIndex();
 
             Console.WriteLine("Enter your query.");
@@ -77,6 +77,7 @@ namespace InverseIndex
         private string SpecifyValue(string specifyingValue)
         {
             Console.WriteLine($"Would you like to specify the {specifyingValue}? Y/N");
+            Console.WriteLine($"NOTE: if N, default value will be used.");
             var input = Console.ReadLine();
             while (input != "Y" && input != "y" && input != "N" && input != "n")
             {
