@@ -59,7 +59,8 @@ namespace InverseIndex
             {
                 var parser = new Parser(input);
                 parsedInput = parser.Parse();
-                var processor = new Processor(pathToIndex, Enumerable.Range(0, Directory.GetFiles(Directory.GetCurrentDirectory() + "/../../../../Corpus").Length).ToArray());
+
+                var processor = new Processor(pathToIndex, Enumerable.Range(0, 11248).ToArray());
                 Console.WriteLine($"Documents' ids: {processor.Process(parsedInput)}");
             }
             catch
