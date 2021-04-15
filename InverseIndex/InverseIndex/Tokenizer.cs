@@ -91,7 +91,7 @@ namespace InverseIndex
                                 tokenWithoutSpecialCharacters = RemoveSpecialCharacters(token);
                             }
 
-                            if (token != "")
+                            if (tokenWithoutSpecialCharacters != "")
                             {
                                 streamWriter.WriteLine(tokenWithoutSpecialCharacters + " " + docNumber);
                             }
