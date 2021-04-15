@@ -145,7 +145,6 @@ namespace InverseIndex
                 return string.Join(' ', docsIds);
             }
 
-            var line = FindLineWithTerm(element);
             var docsWithTerm = element.Any(char.IsLetter) ? FindLineWithTerm(element).Split(' ').Skip(2).ToArray() : element.Split(' ');
             return string.Join(' ', docsIds.Except(Array.ConvertAll(docsWithTerm, int.Parse)));
         }
