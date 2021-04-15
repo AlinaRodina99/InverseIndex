@@ -15,7 +15,7 @@
 
   <ItemGroup>
     <PackageReference Include="McBits.Tokenization" Version="2.0.0" />
-    <PackageReference Include="Porter2Stemmer" Version="1.0.0" />
+    <PackageReference Include="Porter2StemmerStandard" Version="1.1.0" />
     <PackageReference Include="PriorityQueues_boraaros" Version="2.0.1" />
   </ItemGroup>
 

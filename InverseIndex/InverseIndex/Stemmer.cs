@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.IO;
-using Porter2Stemmer;
+using Porter2StemmerStandard;
 using System.Threading.Tasks;
-using System.Collections.Concurrent;
 
 namespace InverseIndex
 {
