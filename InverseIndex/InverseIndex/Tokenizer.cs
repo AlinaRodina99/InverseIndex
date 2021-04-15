@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 using System.Threading.Tasks;
 using McBits.Tokenization;
 
@@ -32,6 +33,24 @@ namespace InverseIndex
         }
 
         /// <summary>
+        /// Removes special characters from string
+        /// </summary>
+        /// <param name="str">Given string</param>
+        /// <returns>String without special characters</returns>
+        private string RemoveSpecialCharacters(string str)
+        {
+            var newString = new StringBuilder();
+            foreach (char character in str)
+            {
+                if ((character >= 'A' && character <= 'Z') || (character >= 'a' && character <= 'z'))
+                {
+                    newString.Append(character);
+                }
+            }
+            return newString.ToString();
+        }
+
+        /// <summary>
         /// Tokenizes corpus and adds it to the path of tokenized corpus
         /// </summary>
         public void Tokenize()
@@ -46,7 +65,8 @@ namespace InverseIndex
                     {
                         foreach (var token in tokenizer.Tokenize())
                         {
-                            streamWriter.WriteLine(token + " " + Path.GetFileNameWithoutExtension(corpusFile).Substring(4));
+                            var tokenWithoutSpecialCharacters = RemoveSpecialCharacters(token);
+                            streamWriter.WriteLine(tokenWithoutSpecialCharacters + " " + Path.GetFileNameWithoutExtension(corpusFile).Substring(4));
                         }
                     }
                 }

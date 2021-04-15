@@ -62,18 +62,25 @@ namespace InverseIndex
                     postingList.Sort();
                 }
 
-                var sortedDictionary = new SortedDictionary<string, List<int>>(dictionary);
-                using (var streamWriter = File.CreateText(stemmedFile))
+                try
                 {
-                    foreach (var element in sortedDictionary)
+                    var sortedDictionary = new SortedDictionary<string, List<int>>(dictionary);
+                    using (var streamWriter = File.CreateText(stemmedFile))
                     {
-                        streamWriter.Write(element.Key);
-                        foreach (var docId in element.Value)
+                        foreach (var element in sortedDictionary)
                         {
-                            streamWriter.Write($" {docId}");
+                            streamWriter.Write(element.Key);
+                            foreach (var docId in element.Value)
+                            {
+                                streamWriter.Write($" {docId}");
+                            }
+                            streamWriter.WriteLine();
                         }
-                        streamWriter.WriteLine();
                     }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
                 }
             }
         }
