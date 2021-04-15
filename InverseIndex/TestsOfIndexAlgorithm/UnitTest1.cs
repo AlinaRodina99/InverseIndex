@@ -9,7 +9,7 @@ namespace TestsOfIndexAlgorithm
         [SetUp]
         public void Setup()
         {
-            stemmer = new Stemmer($"{Directory.GetCurrentDirectory()}", )
+            //stemmer = new Stemmer($"{Directory.GetCurrentDirectory()}", );
         }
 
         [Test]
