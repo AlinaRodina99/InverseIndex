@@ -48,7 +48,6 @@ namespace InverseIndex
             {
                 pathToIndex = Directory.GetCurrentDirectory() + "/../../../../Index.txt";
             }
-            File.Create(pathToIndex);
 
             var buildingIndex = new Spimi(Directory.GetCurrentDirectory() + "/../../../../TermsAndDocIds", pathToIndex);
             buildingIndex.BuildIndex();

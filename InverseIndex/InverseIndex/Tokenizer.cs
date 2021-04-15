@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using McBits.Tokenization;
 
@@ -13,6 +15,7 @@ namespace InverseIndex
     {
         private string pathToCorpus;
         private string pathToTokenizedCorpus;
+        public Dictionary<string, int> ArticleNameAndNumber { get; private set; }
 
         /// <summary>
         /// Tokenizer constuctor
@@ -56,17 +59,42 @@ namespace InverseIndex
         public void Tokenize()
         {
             var corpusFiles = Directory.GetFiles(pathToCorpus);
+
+            var docsFirstIndex = new int[30];
+            var index = 0;
+            var docsAmount = 0;
+            foreach (var corpusFile in corpusFiles)
+            {
+                docsFirstIndex[index] = docsAmount;
+                docsAmount += Regex.Matches(File.ReadAllText(corpusFile), @"\[\[").Count;
+                ++index;
+            }
+
             Parallel.ForEach(corpusFiles, corpusFile =>
             {
+                var docNumber = docsFirstIndex[Convert.ToInt32(Path.GetFileNameWithoutExtension(corpusFile).Substring(4))] - 1;
                 var tokenizer = new TextTokenizer(File.ReadAllText(corpusFile));
                 try
                 {
-                    using (var streamWriter = File.CreateText(pathToTokenizedCorpus + @"\tokenized_" + Path.GetFileName(corpusFile)))
+                    using (var streamWriter = File.CreateText(pathToTokenizedCorpus + Path.AltDirectorySeparatorChar + @"tokenized_" + Path.GetFileName(corpusFile)))
                     {
                         foreach (var token in tokenizer.Tokenize())
                         {
-                            var tokenWithoutSpecialCharacters = RemoveSpecialCharacters(token);
-                            streamWriter.WriteLine(tokenWithoutSpecialCharacters + " " + Path.GetFileNameWithoutExtension(corpusFile).Substring(4));
+                            var tokenWithoutSpecialCharacters = "";
+                            if (token.Contains("ArticleBeggining"))
+                            {
+                                ++docNumber;
+                                tokenWithoutSpecialCharacters = RemoveSpecialCharacters(token.Replace("ArticleBeggining", ""));
+                            }
+                            else
+                            {
+                                tokenWithoutSpecialCharacters = RemoveSpecialCharacters(token);
+                            }
+
+                            if (token != "")
+                            {
+                                streamWriter.WriteLine(tokenWithoutSpecialCharacters + " " + docNumber);
+                            }
                         }
                     }
                 }

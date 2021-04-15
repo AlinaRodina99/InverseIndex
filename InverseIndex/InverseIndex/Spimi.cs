@@ -122,6 +122,8 @@ namespace InverseIndex
                 queue.Enqueue(postingListInt, term);
             }
 
+            Directory.CreateDirectory(Path.GetDirectoryName(pathToIndex));
+
             while (queue.Count != 0)
             {
                 var priorityOfHeadElement = queue.PeekPriority;
@@ -137,7 +139,7 @@ namespace InverseIndex
                     }
                 }
 
-                using (var streamWriter = File.CreateText(pathToIndex))
+                using (var streamWriter = new StreamWriter(pathToIndex))
                 {
                     headElement.Sort();
                     streamWriter.Write($"{priorityOfHeadElement} {headElement.Count}");

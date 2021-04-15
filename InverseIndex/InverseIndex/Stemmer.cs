@@ -39,7 +39,7 @@ namespace InverseIndex
             {
                 try
                 {
-                    using (var streamWriter = File.CreateText(pathToTermsAndDocIds + @"\lemmas_" + Path.GetFileName(tokenizedFile).Substring(10)))
+                    using (var streamWriter = File.CreateText(pathToTermsAndDocIds + Path.AltDirectorySeparatorChar + @"lemmas_" + Path.GetFileName(tokenizedFile).Substring(10)))
                     { 
                         var lines = File.ReadAllLines(tokenizedFile);
 
