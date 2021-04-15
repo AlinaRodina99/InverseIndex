@@ -118,29 +118,28 @@ namespace InverseIndex
                 {
                     postingListInt.Add(Convert.ToInt32(termAndPostingList[i]));
                 }
-                
+
                 queue.Enqueue(postingListInt, term);
             }
 
             Directory.CreateDirectory(Path.GetDirectoryName(pathToIndex));
-
-            while (queue.Count != 0)
+            using (var streamWriter = new StreamWriter(pathToIndex))
             {
-                var priorityOfHeadElement = queue.PeekPriority;
-                var headElement = queue.Dequeue();
-
-                while (queue.Count != 0 && priorityOfHeadElement == queue.PeekPriority)
+                while (queue.Count != 0)
                 {
-                    var nextPostingList = queue.Dequeue();
+                    var priorityOfHeadElement = queue.PeekPriority;
+                    var headElement = queue.Dequeue();
 
-                    foreach (var el in nextPostingList)
+                    while (queue.Count != 0 && priorityOfHeadElement == queue.PeekPriority)
                     {
-                        headElement.Add(el);
-                    }
-                }
+                        var nextPostingList = queue.Dequeue();
 
-                using (var streamWriter = new StreamWriter(pathToIndex))
-                {
+                        foreach (var el in nextPostingList)
+                        {
+                            headElement.Add(el);
+                        }
+                    }
+
                     headElement.Sort();
                     streamWriter.Write($"{priorityOfHeadElement} {headElement.Count}");
                     foreach (var element in headElement)
@@ -149,6 +148,7 @@ namespace InverseIndex
                     }
 
                     streamWriter.WriteLine();
+
                 }
             }
         }
