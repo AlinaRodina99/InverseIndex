@@ -4,7 +4,7 @@
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/b2d19a1377c84f24a0868565a0ed4207)](https://www.codacy.com/gh/AlinaRodina99/InverseIndex/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=AlinaRodina99/InverseIndex&amp;utm_campaign=Badge_Grade)
 
 
-Inversed index is a program for information retrieval from the corpus according to a given boolean query.
+Inversed index is a program for information retrieval from the corpus according to a given boolean query. :mag:
 
 
 ### Prerequisites
@@ -41,7 +41,7 @@ chmod +x run.sh
 ./run.sh
 ```
 
-3. Enjoy! :)
+3. Enjoy! :sunglasses:
 
 
 
@@ -72,10 +72,10 @@ NOT ((word1 OR word 2) AND NOT (word3 OR word4))
 
 ## Authors
 
-* **Alina Rodina** – [GitHub](https://github.com/AlinaRodina99)
-* **Yuniya Kim** – [GitHub](https://github.com/YuniyaKim)
+* **Alina Rodina** – [GitHub](https://github.com/AlinaRodina99) :cat:
+* **Yuniya Kim** – [GitHub](https://github.com/YuniyaKim) :dog:
 
-Special thanks to **Kirill Smirnov** for great contribution to the development.
+Special thanks to **Kirill Smirnov** for great contribution to the development. :computer:
 
 
 
