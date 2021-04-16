@@ -42,8 +42,9 @@ namespace InverseIndex
 
                         foreach (var line in lines)
                         {
-                            var token = line.Split(' ')[0];
-                            streamWriter.WriteLine(stemmer.Stem(token).Value + $" {line.Split(' ')[1]}");
+                            var tokenAndDocId = line.Split(' ');
+                            var token = tokenAndDocId[0];
+                            streamWriter.WriteLine(stemmer.Stem(token).Value + $" {tokenAndDocId[1]}");
                         }
                     }
                 }
