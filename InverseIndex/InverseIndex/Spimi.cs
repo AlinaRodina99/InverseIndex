@@ -90,7 +90,6 @@ namespace InverseIndex
         private void MergeBlocks()
         {
             var blocks = Directory.GetFiles(pathToTermsAndDocIds);
-            var locker = new object();
             var queue = new BinaryHeap<List<int>, string>(PriorityQueueType.Minimum);
             var listWithTermsAndPostingLists = new ConcurrentBag<string>();
 

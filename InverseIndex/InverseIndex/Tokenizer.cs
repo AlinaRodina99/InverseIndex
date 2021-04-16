@@ -13,8 +13,8 @@ namespace InverseIndex
     /// </summary>
     public class Tokenizer
     {
-        private string pathToCorpus;
-        private string pathToTokenizedCorpus;
+        private readonly string pathToCorpus;
+        private readonly string pathToTokenizedCorpus;
         public Dictionary<string, int> ArticleNameAndNumber { get; private set; }
 
         /// <summary>

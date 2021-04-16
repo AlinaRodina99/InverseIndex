@@ -10,8 +10,8 @@ namespace InverseIndex
     /// </summary>
     public class Processor
     {
-        private string pathToIndex;
-        private int[] docsIds;
+        private readonly string pathToIndex;
+        private readonly int[] docsIds;
 
         /// <summary>
         /// Query's processor constructor
