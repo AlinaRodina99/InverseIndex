@@ -25,7 +25,7 @@ git clone https://github.com/AlinaRodina99/InverseIndex
 To run the program do the following:
 
 
-1. Go to InverseIndex folder
+1. Go to *InverseIndex* folder
 ```
 cd InverseIndex
 ```
@@ -47,6 +47,7 @@ chmod +x run.sh
 
 ### Query
 Query support three boolean operations: AND, OR and NOT. You can also use parenthesis.
+
 Here are some query examples:
 
 * Example 1
