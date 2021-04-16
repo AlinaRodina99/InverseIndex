@@ -46,7 +46,7 @@ chmod +x run.sh
 
 
 ### Query
-Query support three boolean operations: AND, OR and NOT. You can also use parenthesis.
+Queries support three boolean operations: AND, OR and NOT. You can also use parenthesis.
 
 Here are some query examples:
 
