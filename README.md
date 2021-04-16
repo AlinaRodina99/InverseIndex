@@ -9,7 +9,7 @@ Inversed index is a program for information retrieval from the corpus according 
 
 ### Prerequisites
 
-* .NET Core 3.1 (you can [download](https://dotnet.microsoft.com/download/dotnet/3.1) it).
+* .NET Core 3.1 (you can [download](https://dotnet.microsoft.com/download/dotnet/3.1) it)
 
 
 ### Installing
