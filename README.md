@@ -1,4 +1,4 @@
-# InverseIndex
+# Inversed index
 [![Build status](https://ci.appveyor.com/api/projects/status/70nsp5hoy5oscwbp/branch/main?svg=true)](https://ci.appveyor.com/project/yuniyakim/inverseindex/branch/main)
 [![Build Status](https://travis-ci.org/AlinaRodina99/InverseIndex.svg?branch=main)](https://travis-ci.org/AlinaRodina99/InverseIndex)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/b2d19a1377c84f24a0868565a0ed4207)](https://www.codacy.com/gh/AlinaRodina99/InverseIndex/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=AlinaRodina99/InverseIndex&amp;utm_campaign=Badge_Grade)
@@ -22,7 +22,7 @@ git clone https://github.com/AlinaRodina99/InverseIndex
 
 ## Getting started
 
-To run the program do the following:
+To run the program, do the following:
 
 
 1. Go to *InverseIndex* folder
@@ -48,7 +48,7 @@ chmod +x run.sh
 ### Query
 Queries support three boolean operations: AND, OR and NOT. You can also use parenthesis.
 
-Here are some query examples:
+Here are some queries examples:
 
 * Example 1
 
@@ -68,6 +68,14 @@ word1 AND (word2 OR NOT word3)
 NOT ((word1 OR word 2) AND NOT (word3 OR word4))
 ```
 
+
+## Technologies
+
+A list of libraries used within the project:
+
+* [McBits.Tokenization](https://www.nuget.org/packages/McBits.Tokenization): Version 2.0.0 
+* [Porter2StemmerStandard](https://www.nuget.org/packages/Porter2StemmerStandard): Version 1.1.0
+* [PriorityQueues_boraaros](https://www.nuget.org/packages/PriorityQueues_boraaros): Version 2.0.1
 
 
 ## Authors
