@@ -1,0 +1,4 @@
+bicycle 4
+fly 6
+ride 5
+stop 6

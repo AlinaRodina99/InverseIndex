@@ -1,0 +1,4 @@
+ball 7
+bird 9
+cat 9
+dog 8

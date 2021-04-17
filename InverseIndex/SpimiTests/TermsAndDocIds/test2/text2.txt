@@ -1,0 +1,4 @@
+fly 9
+ride 8
+shop 7
+trip 9
