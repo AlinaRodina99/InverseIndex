@@ -31,7 +31,6 @@ namespace InverseIndex
         {
             var stemmer = new EnglishPorter2Stemmer();
             var tokenizedFiles = Directory.GetFiles(pathToTokenizedCorpus);
-            var locker = new object();
             Parallel.ForEach(tokenizedFiles, tokenizedFile =>
             {
                 try
