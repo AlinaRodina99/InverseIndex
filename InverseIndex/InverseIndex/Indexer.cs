@@ -43,23 +43,31 @@ namespace InverseIndex
             }
 
             Console.WriteLine();
-            Console.WriteLine("Enter your query.");
-            var input = Console.ReadLine();
-            var parsedInput = "";
-            try
+            Console.WriteLine("Enter your boolean query.");
+            Console.WriteLine("NOTE: boolean operators AND (&&), OR (||), NOT (-) are written with capital letters.");
+            var queryInput = Console.ReadLine();
+            do
             {
-                var parser = new Parser(input);
-                parsedInput = parser.Parse();
+                var parsedInput = "";
+                try
+                {
+                    var parser = new Parser(queryInput);
+                    parsedInput = parser.Parse();
 
-                var processor = new Processor(pathToIndex, Enumerable.Range(0, 11248).ToArray());
-                Console.WriteLine($"Documents' ids: {processor.Process(parsedInput)}");
+                    var processor = new Processor(pathToIndex, Enumerable.Range(0, 11248).ToArray());
+                    Console.WriteLine($"Documents' ids: {processor.Process(parsedInput)}");
+                }
+                catch
+                {
+                    Console.WriteLine("Incorrect query.");
+                }
+
+                Console.WriteLine();
+                Console.WriteLine($"Would you like to enter another query? Y/N");
+
+                queryInput = ProvideInput("your boolean query");
             }
-            catch
-            {
-                Console.WriteLine("Incorrect query.");
-            }
-
-
+            while (queryInput != "");
         }
 
         /// <summary>
@@ -78,6 +86,7 @@ namespace InverseIndex
 
             if (input == "Y" || input == "y")
             {
+                Console.WriteLine();
                 Console.WriteLine($"Enter {inputValue}.");
                 return Console.ReadLine();
             }
@@ -103,6 +112,9 @@ namespace InverseIndex
 
             var pathToTokenizedCorpus = Directory.GetCurrentDirectory() + "/InverseIndex/TokenizedCorpus";
             Directory.CreateDirectory(pathToTokenizedCorpus);
+
+            Console.WriteLine();
+            Console.WriteLine("Please, wait.");
 
             var tokenization = new Tokenizer(pathToCorpus, pathToTokenizedCorpus);
             tokenization.Tokenize();
