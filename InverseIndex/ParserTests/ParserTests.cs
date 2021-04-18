@@ -133,5 +133,11 @@ namespace ParserTests
             parser = new Parser("NOT word1 word2 AND OR word3");
             Assert.Throws<ArgumentException>(() => parser.Parse());
         }
+
+        [Test]
+        public void YetOneMoreAnotherInvalidInputParseTest()
+        {
+            Assert.Throws<ArgumentException>(() => parser = new Parser("word1 word2"));
+        }
     }
 }

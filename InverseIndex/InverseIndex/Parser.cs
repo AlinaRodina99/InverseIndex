@@ -20,6 +20,10 @@ namespace InverseIndex
             input = input.Replace("AND", "&");
             input = input.Replace("OR", "|");
             input = input.Replace("NOT", "-");
+            if (input.Trim().Contains(' ') && !input.Contains('&') && !input.Contains('|') && !input.Contains('-'))
+            {
+                throw new ArgumentException();
+            }
             this.input = input;
         }
 

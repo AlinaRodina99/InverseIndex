@@ -30,26 +30,18 @@ namespace InverseIndex
         /// <returns>Line containing given term, empty string if there is no line containing given term</returns>
         private string FindLineWithTerm(string term)
         {
-            try
+            using (var fileStream = File.Open(pathToIndex, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            using (var buferredStream = new BufferedStream(fileStream))
+            using (var streamReader = new StreamReader(buferredStream))
             {
-                using (var fileStream = File.Open(pathToIndex, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-                using (var buferredStream = new BufferedStream(fileStream))
-                using (var streamReader = new StreamReader(buferredStream))
+                var line = "";
+                do
                 {
-                    var line = "";
-                    do
-                    {
-                        line = streamReader.ReadLine();
-                    }
-                    while (!line.StartsWith(term) && line.Split(' ')[0] != term);
-                    return line;
+                    line = streamReader.ReadLine();
                 }
+                while (!line.StartsWith(term) && line.Split(' ')[0] != term);
+                return line;
             }
-            catch (Exception exception)
-            {
-                Console.WriteLine(exception.Message);
-            }
-            return "";
         }
 
 
