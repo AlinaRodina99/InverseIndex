@@ -21,17 +21,17 @@ git clone https://github.com/AlinaRodina99/InverseIndex
 To run the program, do the following:
 
 1.  Go to *InverseIndex* folder
-```
+```cmd
 cd InverseIndex
 ```
 
 2.  Launch run file
 *   If you're using *Windows*, launch **run.bat**
-```
+```cmd
 run
 ```
 *   If you're using *Linux*, launch **run.sh**
-```
+```cmd
 chmod +x run.sh
 ./run.sh
 ```
@@ -45,19 +45,19 @@ Here are some queries examples:
 
 *   Example 1
 
-```
+```cmd
 word
 ```
 
 *   Example 2
 
-```
+```cmd
 word1 AND (word2 OR NOT word3)
 ```
 
 *   Example 3
 
-```
+```cmd
 NOT ((word1 OR word 2) AND NOT (word3 OR word4))
 ```
 
