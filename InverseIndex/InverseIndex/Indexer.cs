@@ -58,18 +58,17 @@ namespace InverseIndex
             {
                 Console.WriteLine("Incorrect query.");
             }
+
+
         }
 
         /// <summary>
-        /// Specifies given value from user if desired
+        /// Provides input if desired
         /// </summary>
-        /// <param name="specifyingValue">Value to specify</param>
-        /// <returns>Specified value if desired, empty string otherwise</returns>
-        private string SpecifyValue(string specifyingValue)
+        /// <param name="inputValue">Value to enter</param>
+        /// <returns>Entered value if desired, empty string otherwise</returns>
+        private string ProvideInput(string inputValue)
         {
-            Console.WriteLine();
-            Console.WriteLine($"Would you like to specify the {specifyingValue}? Y/N");
-            Console.WriteLine($"NOTE: if N, default value will be used.");
             var input = Console.ReadLine();
             while (input != "Y" && input != "y" && input != "N" && input != "n")
             {
@@ -79,7 +78,7 @@ namespace InverseIndex
 
             if (input == "Y" || input == "y")
             {
-                Console.WriteLine($"Enter the {specifyingValue}");
+                Console.WriteLine($"Enter {inputValue}.");
                 return Console.ReadLine();
             }
 
@@ -92,7 +91,11 @@ namespace InverseIndex
         /// <returns>Path to index</returns>
         private string CreateIndex()
         {
-            var pathToCorpus = SpecifyValue("path to corpus");
+            Console.WriteLine();
+            Console.WriteLine($"Would you like to specify the path to corpus? Y/N");
+            Console.WriteLine($"NOTE: if N, default value will be used.");
+
+            var pathToCorpus = ProvideInput("the path to corpus");
             if (pathToCorpus == "")
             {
                 pathToCorpus = Directory.GetCurrentDirectory() + "/InverseIndex/Corpus";
