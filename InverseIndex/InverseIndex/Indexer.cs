@@ -55,7 +55,8 @@ namespace InverseIndex
                     parsedInput = parser.Parse();
 
                     var processor = new Processor(pathToIndex, Enumerable.Range(0, 11248).ToArray());
-                    Console.WriteLine($"Documents' ids: {processor.Process(parsedInput)}");
+                    var docsId = processor.Process(parsedInput);
+                    Console.WriteLine( docsId == "" ? $"Cannot find documents with \"{queryInput}\"." : $"Documents' ids: {processor.Process(parsedInput)}.");
                 }
                 catch
                 {
