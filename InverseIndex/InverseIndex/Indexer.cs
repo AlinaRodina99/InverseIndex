@@ -18,40 +18,29 @@ namespace InverseIndex
             Console.WriteLine("Hello!");
             Console.WriteLine("This program processes given corpus and provides boolean search within it using created inverse index.");
 
-            var pathToCorpus = SpecifyValue("path to corpus");
-            if (pathToCorpus == "")
+            var pathToIndex = Directory.GetCurrentDirectory() + "/InverseIndex/Index.txt";
+
+            if (File.Exists(pathToIndex))
             {
-                pathToCorpus = Directory.GetCurrentDirectory() + "/InverseIndex/Corpus";
-            }
+                Console.WriteLine();
+                Console.WriteLine($"Would you like to re-create index? Y/N");
+                Console.WriteLine($"NOTE: if N, existed index will be used.");
+                var indexInput = Console.ReadLine();
+                while (indexInput != "Y" && indexInput != "y" && indexInput != "N" && indexInput != "n")
+                {
+                    Console.WriteLine("Please, enter Y or N.");
+                    indexInput = Console.ReadLine();
+                }
 
-            var pathToTokenizedCorpus = SpecifyValue("path to tokenized corpus");
-            if (pathToTokenizedCorpus == "")
+                if (indexInput == "Y" || indexInput == "y")
+                {
+                    pathToIndex = CreateIndex();
+                }
+            }
+            else
             {
-                pathToTokenizedCorpus = Directory.GetCurrentDirectory() + "/InverseIndex/TokenizedCorpus";
+                pathToIndex = CreateIndex();
             }
-            Directory.CreateDirectory(pathToTokenizedCorpus);
-
-            var tokenization = new Tokenizer(pathToCorpus, pathToTokenizedCorpus);
-            tokenization.Tokenize();
-
-            var pathToTermsAndDocIds = SpecifyValue("path to terms and documents id");
-            if (pathToTermsAndDocIds == "")
-            {
-                pathToTermsAndDocIds = Directory.GetCurrentDirectory() + "/InverseIndex/TermsAndDocIds";
-            }
-            Directory.CreateDirectory(pathToTermsAndDocIds);
-
-            var stemmer = new Stemmer(pathToTokenizedCorpus, pathToTermsAndDocIds);
-            stemmer.GetLemmas();
-
-            var pathToIndex = SpecifyValue("path to index");
-            if (pathToIndex == "")
-            {
-                pathToIndex = Directory.GetCurrentDirectory() + "/InverseIndex/Index.txt";
-            }
-
-            var buildingIndex = new Spimi(pathToTermsAndDocIds, pathToIndex);
-            buildingIndex.BuildIndex();
 
             Console.WriteLine();
             Console.WriteLine("Enter your query.");
@@ -95,6 +84,38 @@ namespace InverseIndex
             }
 
             return "";
+        }
+
+        /// <summary>
+        /// Creates index
+        /// </summary>
+        /// <returns>Path to index</returns>
+        private string CreateIndex()
+        {
+            var pathToCorpus = SpecifyValue("path to corpus");
+            if (pathToCorpus == "")
+            {
+                pathToCorpus = Directory.GetCurrentDirectory() + "/InverseIndex/Corpus";
+            }
+
+            var pathToTokenizedCorpus = Directory.GetCurrentDirectory() + "/InverseIndex/TokenizedCorpus";
+            Directory.CreateDirectory(pathToTokenizedCorpus);
+
+            var tokenization = new Tokenizer(pathToCorpus, pathToTokenizedCorpus);
+            tokenization.Tokenize();
+
+            var pathToTermsAndDocIds = Directory.GetCurrentDirectory() + "/InverseIndex/TermsAndDocIds";
+            Directory.CreateDirectory(pathToTermsAndDocIds);
+
+            var stemmer = new Stemmer(pathToTokenizedCorpus, pathToTermsAndDocIds);
+            stemmer.GetLemmas();
+
+            var pathToIndex = Directory.GetCurrentDirectory() + "/InverseIndex/Index.txt";
+
+            var buildingIndex = new Spimi(pathToTermsAndDocIds, pathToIndex);
+            buildingIndex.BuildIndex();
+
+            return pathToIndex;
         }
     }
 }
