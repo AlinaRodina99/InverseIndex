@@ -189,7 +189,7 @@ namespace InverseIndex
                     var result = stack.Pop();
                     return result.Any(char.IsLetter) ? string.Join(' ', FindLineWithTerm(result).Split(' ').Skip(2)) : result;
                 }
-                catch (NullReferenceException e)
+                catch (NullReferenceException)
                 {
                     return "";
                 }
