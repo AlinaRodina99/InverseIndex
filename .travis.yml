@@ -9,3 +9,4 @@ env:
 script:
   - dotnet restore $solution
   - dotnet build $solution
+  - dotnet test $solution

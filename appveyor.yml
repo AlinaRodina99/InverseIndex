@@ -13,4 +13,5 @@ before_build:
 build_script:
   project: $(solution)
 
-test: off
+test:
+  - dotnet test %solution%
