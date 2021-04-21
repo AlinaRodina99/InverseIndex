@@ -81,7 +81,29 @@ namespace InverseIndex
             {
                 case 1:
                     {
-                        return string.Join(' ', parse.Item1.Split(' ').Intersect(parse.Item2.Split(' ')));
+                        var docsIds1 = parse.Item1.Split(' ');
+                        var docsIds2 = parse.Item2.Split(' ');
+                        var i = 0;
+                        var j = 0;
+                        var andlist = "";
+                        while (i < docsIds1.Length && j < docsIds2.Length)
+                        {
+                            if (int.Parse(docsIds1[i]) < int.Parse(docsIds2[j]))
+                            {
+                                ++i;
+                            }
+                            else if (int.Parse(docsIds1[i]) > int.Parse(docsIds2[j]))
+                            {
+                                ++j;
+                            }
+                            else
+                            {
+                                andlist += docsIds1[i] + " ";
+                                ++i;
+                                ++j;
+                            }
+                        }
+                        return andlist;
                     }
                 case 2:
                 case 3:
@@ -108,7 +130,31 @@ namespace InverseIndex
             {
                 case 1:
                     {
-                        return string.Join(' ', parse.Item1.Split(' ').Union(parse.Item2.Split(' ')));
+                        var docsIds1 = parse.Item1.Split(' ');
+                        var docsIds2 = parse.Item2.Split(' ');
+                        var i = 0;
+                        var j = 0;
+                        var orList = "";
+                        while (i < docsIds1.Length && j < docsIds2.Length)
+                        {
+                            if (int.Parse(docsIds1[i]) < int.Parse(docsIds2[j]))
+                            {
+                                orList += docsIds1[i] + " ";
+                                ++i;
+                            }
+                            else if (int.Parse(docsIds1[i]) > int.Parse(docsIds2[j]))
+                            {
+                                orList += docsIds2[j] + " ";
+                                ++j;
+                            }
+                            else
+                            {
+                                orList += docsIds1[i] + " ";
+                                ++i;
+                                ++j;
+                            }
+                        }
+                        return orList;
                     }
                 case 2:
                     {
@@ -138,7 +184,23 @@ namespace InverseIndex
             }
 
             var docsWithTerm = element.Any(char.IsLetter) ? FindLineWithTerm(element).Split(' ').Skip(2).ToArray() : element.Split(' ');
-            return string.Join(' ', docsIds.Except(Array.ConvertAll(docsWithTerm, int.Parse)));
+            var notList = "";
+            var i = 0;
+            var j = 0;
+            while (i < docsWithTerm.Length)
+            {
+                if (docsIds[j] < int.Parse(docsWithTerm[i]))
+                {
+                    notList += docsIds[j] + " ";
+                    ++j;
+                }
+                else
+                {
+                    ++j;
+                    ++i;
+                }
+            }
+            return notList;
         }
 
         /// <summary>
