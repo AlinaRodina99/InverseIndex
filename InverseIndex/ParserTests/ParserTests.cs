@@ -139,5 +139,12 @@ namespace ParserTests
         {
             Assert.Throws<ArgumentException>(() => parser = new Parser("word1 word2"));
         }
+
+        [Test]
+        public void SomeNotParseTest()
+        {
+            parser = new Parser("NOT a");
+            Assert.AreEqual("a -", parser.Parse());
+        }
     }
 }

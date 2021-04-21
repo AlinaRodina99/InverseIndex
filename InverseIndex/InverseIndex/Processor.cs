@@ -60,12 +60,12 @@ namespace InverseIndex
 
             var docsWithTerm1 = element1.Any(char.IsLetter) ? string.Join(' ', FindLineWithTerm(element1).Split(' ').Skip(2)) : element1;
             var docsWithTerm2 = element2.Any(char.IsLetter) ? string.Join(' ', FindLineWithTerm(element2).Split(' ').Skip(2)) : element2;
-            if (element1 != "" && element2 != "")
+            if (docsWithTerm1 != "" && docsWithTerm2 != "")
             {
                 return (docsWithTerm1, docsWithTerm2, 1);
             }
 
-            return element1 == "" ? (docsWithTerm2, docsWithTerm1, 2) : (docsWithTerm1, docsWithTerm2, 2);
+            return docsWithTerm1 == "" ? (docsWithTerm2, docsWithTerm1, 2) : (docsWithTerm1, docsWithTerm2, 2);
         }
 
         /// <summary>
@@ -199,6 +199,11 @@ namespace InverseIndex
                     ++j;
                     ++i;
                 }
+            }
+            while (j < docsIds.Length)
+            {
+                notList += docsIds[j] + " ";
+                ++j;
             }
             return notList;
         }

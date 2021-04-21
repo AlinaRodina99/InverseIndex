@@ -54,7 +54,7 @@ namespace InverseIndex
                     var parser = new Parser(queryInput);
                     parsedInput = parser.Parse();
 
-                    var processor = new Processor(pathToIndex, Enumerable.Range(0, 11248).ToArray());
+                    var processor = new Processor(pathToIndex, Enumerable.Range(0, 11726).ToArray());
                     var docsId = processor.Process(parsedInput);
                     if (docsId == "")
                     {
@@ -67,11 +67,11 @@ namespace InverseIndex
                         Console.WriteLine();
                         Console.WriteLine("Enter the amount of documents' ids to show.");
                         var inputAmount = 0;
-                        var flag = Int32.TryParse(Console.ReadLine(), out inputAmount) && inputAmount > 0 && inputAmount <= docsIdArray.Length;
+                        var flag = Int32.TryParse(Console.ReadLine(), out inputAmount) && inputAmount >= 0 && inputAmount <= docsIdArray.Length;
                         while (!flag)
                         {
                             Console.WriteLine("Please, enter the correct amount of documents' ids.");
-                            flag = Int32.TryParse(Console.ReadLine(), out inputAmount) && inputAmount > 0 && inputAmount <= docsIdArray.Length;
+                            flag = Int32.TryParse(Console.ReadLine(), out inputAmount) && inputAmount >= 0 && inputAmount <= docsIdArray.Length;
                         }
                         var firstDocsId = docsIdArray.Take(inputAmount);
                         foreach (var id in firstDocsId)
