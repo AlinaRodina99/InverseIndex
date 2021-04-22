@@ -45,8 +45,9 @@ namespace InverseIndex
             Console.WriteLine();
             Console.WriteLine("Enter your boolean query.");
             Console.WriteLine("NOTE: boolean operators AND (&&), OR (||), NOT (-) are written with capital letters.");
+            Console.WriteLine("NOTE: enter q to quit.");
             var queryInput = Console.ReadLine();
-            do
+            while (queryInput != "q")
             {
                 var parsedInput = "";
                 try
@@ -87,11 +88,10 @@ namespace InverseIndex
                 }
 
                 Console.WriteLine();
-                Console.WriteLine($"Would you like to enter another query? Y/N");
+                Console.WriteLine($"Enter your boolean query");
 
-                queryInput = ProvideInput("your boolean query");
+                queryInput = Console.ReadLine();
             }
-            while (queryInput != "");
         }
 
         /// <summary>
@@ -134,7 +134,7 @@ namespace InverseIndex
                 pathToCorpus = Directory.GetCurrentDirectory() + "/InverseIndex/Corpus";
             }
 
-            var pathToTokenizedCorpus = Directory.GetCurrentDirectory() + "/InverseIndex/TokenizedCorpus";
+            var pathToTokenizedCorpus = pathToCorpus + "/../TokenizedCorpus";
             Directory.CreateDirectory(pathToTokenizedCorpus);
 
             Console.WriteLine();
@@ -143,13 +143,13 @@ namespace InverseIndex
             var tokenization = new Tokenizer(pathToCorpus, pathToTokenizedCorpus);
             tokenization.Tokenize();
 
-            var pathToTermsAndDocIds = Directory.GetCurrentDirectory() + "/InverseIndex/TermsAndDocIds";
+            var pathToTermsAndDocIds = pathToCorpus + "/../TermsAndDocIds";
             Directory.CreateDirectory(pathToTermsAndDocIds);
 
             var stemmer = new Stemmer(pathToTokenizedCorpus, pathToTermsAndDocIds);
             stemmer.GetLemmas();
 
-            var pathToIndex = Directory.GetCurrentDirectory() + "/InverseIndex/Index.txt";
+            var pathToIndex = pathToCorpus + "/../Index.txt";
 
             var buildingIndex = new Spimi(pathToTermsAndDocIds, pathToIndex);
             buildingIndex.BuildIndex();
