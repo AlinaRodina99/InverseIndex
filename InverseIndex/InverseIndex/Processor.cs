@@ -103,7 +103,7 @@ namespace InverseIndex
                                 ++j;
                             }
                         }
-                        return andlist;
+                        return andlist.Trim();
                     }
                 case 2:
                 case 3:
@@ -154,7 +154,17 @@ namespace InverseIndex
                                 ++j;
                             }
                         }
-                        return orList;
+                        while (i < docsIds1.Length)
+                        {
+                            orList += docsIds[i] + " ";
+                            ++i;
+                        }
+                        while (j < docsIds2.Length)
+                        {
+                            orList += docsIds[j] + " ";
+                            ++j;
+                        }
+                        return orList.Trim();
                     }
                 case 2:
                     {
@@ -205,7 +215,7 @@ namespace InverseIndex
                 notList += docsIds[j] + " ";
                 ++j;
             }
-            return notList;
+            return notList.Trim();
         }
 
         /// <summary>
