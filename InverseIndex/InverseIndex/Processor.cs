@@ -156,12 +156,12 @@ namespace InverseIndex
                         }
                         while (i < docsIds1.Length)
                         {
-                            orList += docsIds[i] + " ";
+                            orList += docsIds1[i] + " ";
                             ++i;
                         }
                         while (j < docsIds2.Length)
                         {
-                            orList += docsIds[j] + " ";
+                            orList += docsIds2[j] + " ";
                             ++j;
                         }
                         return orList.Trim();
